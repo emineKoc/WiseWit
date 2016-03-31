@@ -1,8 +1,8 @@
-# Title: XYZ
+# Title: WiseWit
 # Mission Statement
   ### - To provide effective tools for decision making
 # Introduction
-  #### XYZ is a webapp which let users to brainstorm individually or with a team. It also provide tools to reach out professional consultants and coaches.
+  #### WiseWit is a webapp which let users to brainstorm individually or with a team. It also provide tools to reach out professional consultants and coaches.
 # Technologies Used
   * Backend - Ruby on Rails
   * Front-end - React.js
