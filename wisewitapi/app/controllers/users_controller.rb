@@ -4,19 +4,27 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: {data: 'success'}
+      payload = {token: {id: @user.id, email: @user.email} }
+      token = JWT.encode payload, 'secret', 'HS256'
+
+      render json: {data: token }
     else
     end
   end
 
   def login
-    @user = User.find(user_params)
-    if @user.authenticate
-      #generate a jwt token
-      #send that token to user
-      render json: {token: 'my-token'}
+      @user = User.find_by(email: params[:user][:email])
+      if @user && @user.authenticate(params[:user][:password])
+        payload = {token: {id: @user.id, email: @user.email} }
+        token = JWT.encode payload, 'secret', 'HS256'
+
+        render json: {token: token}
+
+        decoded_token = JWT.decode token, 'secret', true, { :algorithm => 'HS256' }
+        binding.pry
+        puts decoded_token
+      end
     end
-  end
 
   private
 

@@ -36,16 +36,23 @@ const Login = React.createClass({
 
   render: function() {
     return (
-      <nav className="aside-1">
-        <form onSubmit={this.handleSubmit}>
-          <label><input ref="email" placeholder="email" /></label>
-          <label><input ref="pass" placeholder="password" /></label>
-          <button type="submit">login</button>
-          {this.state.error && (
-            <p>Bad login information</p>
-          )}
-        </form>
-      </nav>
+      <section id="signup">
+       <div className="container">
+         <div className="row">
+           <div className="col-lg-12 text-center">
+           <h4>Sign in</h4>
+           <form onSubmit={this.handleSubmit}>
+           <label><input ref="email" placeholder="email" /></label>
+           <label><input ref="pass" placeholder="password" /></label>
+           <button type="submit">login</button>
+           {this.state.error && (
+             <p>Bad login information</p>
+           )}
+          </form>
+        </div>
+      </div>
+    </div>
+    </section>
     )
   }
 })

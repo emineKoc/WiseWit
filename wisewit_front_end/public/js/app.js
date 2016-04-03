@@ -2,13 +2,17 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const ReactRouter = require('react-router');
+
 const Router = ReactRouter.Router;
 const browserHistory = ReactRouter.browserHistory;
 const Route = ReactRouter.Route;
 const Link = ReactRouter.Link;
+
 const auth = require('./authComponents/auth.js');
 const $ = require('jquery');
 const Nav = require('./nav.js')
+const Welcome = require('./welcome_banner.js')
+const HowItWorks = require('./howitworks.js')
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
 const SignUp = require('./authComponents/signup.js');
@@ -36,9 +40,9 @@ const App = React.createClass({
     return (
       <div>
         <Nav loggedIn={this.state.loggedIn} />
-        <nav className="aside-1">
-        {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
-        </nav>
+        {this.props.children || <p>{this.state.loggedIn} You are {!this.state.loggedIn && 'not'} logged in.</p>}
+        <Welcome />
+        <HowItWorks />
       </div>
     )
   }
@@ -56,7 +60,7 @@ const Dashboard = React.createClass({
     event.preventDefault();
 
     $.ajax({
-      url: 'users/:uID',
+      url: 'users/:id',
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", auth.getToken());
       }
@@ -107,4 +111,4 @@ ReactDOM.render((
     </Route>
     <Route path="*" component={ErrorPage} />
   </Router>
-), document.querySelector('#container'))
+), document.querySelector('#app'))

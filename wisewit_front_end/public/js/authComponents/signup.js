@@ -18,13 +18,20 @@ const SignUp = React.createClass({
 
   render: function(){
     return (
-      <nav className="aside-1">
-      <form ref="createUserForm" onSubmit={this.handleSubmit}>
-        <label><input ref="email" placeholder="email" /></label>
-        <label><input ref="password" placeholder="password" /></label>
-        <button type="submit">Sign Up</button>
-      </form>
-      </nav>
+     <section id="signup">
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-12 text-center">
+          <h4>Sign up</h4>
+            <form ref="createUserForm" onSubmit={this.handleSubmit}>
+              <label><input ref="email" placeholder="email" /></label>
+              <label><input ref="password" placeholder="password" /></label>
+              <button type="submit">Sign Up</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      </section>
     )
   }
 })

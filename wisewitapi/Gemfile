@@ -9,6 +9,7 @@ gem 'rack-cors'
 
 gem 'pg'
 gem 'pry-rails'
+gem 'jwt'
 
 
 
