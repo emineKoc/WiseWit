@@ -13,10 +13,12 @@ const $ = require('jquery');
 const Nav = require('./nav.js')
 const Welcome = require('./welcome_banner.js')
 const HowItWorks = require('./howitworks.js')
+
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
 const SignUp = require('./authComponents/signup.js');
 
+const UserDashboard = require('./user_landing_page/user_dashboard.js');
 
 const App = React.createClass({
   getInitialState: function() {
@@ -43,44 +45,45 @@ const App = React.createClass({
         {this.props.children || <p>{this.state.loggedIn} You are {!this.state.loggedIn && 'not'} logged in.</p>}
         <Welcome />
         <HowItWorks />
+        <UserDashboard/>
       </div>
     )
   }
 })
 
-
-const Dashboard = React.createClass({
-  getInitialState: function() {
-    return {
-      user: ''
-    }
-  },
-
-  getUserInfo: function(event) {
-    event.preventDefault();
-
-    $.ajax({
-      url: 'users/:id',
-      beforeSend: function( xhr ) {
-        xhr.setRequestHeader("Authorization", auth.getToken());
-      }
-    }).complete((data) => {
-    })
-  },
-
-  render: function() {
-    const token = auth.getToken()
-
-    return (
-      <div>
-        <h1>Dashboard</h1>
-        <p>Successfully Logged In!</p>
-        <p>{this.state.me}</p>
-        <button onClick={this.getUserInfo}>Show My Info</button>
-      </div>
-    )
-  }
-})
+//
+// const Dashboard = React.createClass({
+//   getInitialState: function() {
+//     return {
+//       user: ''
+//     }
+//   },
+//
+//   getUserInfo: function(event) {
+//     event.preventDefault();
+//
+//     $.ajax({
+//       url: 'http://localhost:9001/users/:id',
+//       beforeSend: function( xhr ) {
+//         xhr.setRequestHeader("Authorization", auth.getToken());
+//       }
+//     }).complete((data) => {
+//     })
+//   },
+//
+//   render: function() {
+//     const token = auth.getToken()
+//
+//     return (
+//       <div>
+//         <h1>Dashboard</h1>
+//         <p>{this.state.me}</p>
+//         <button onClick={this.getUserInfo}>Show My Info</button>
+//         {token}
+//       </div>
+//     )
+//   }
+// })
 
 
 function requireAuth(nextState, replace) {
@@ -107,7 +110,7 @@ ReactDOM.render((
       <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
       <Route path="new" component={SignUp} />
-      <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
+      <Route path="dashboard" component={UserDashboard} onEnter={requireAuth} />
     </Route>
     <Route path="*" component={ErrorPage} />
   </Router>

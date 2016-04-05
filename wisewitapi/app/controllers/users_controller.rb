@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :update,:destroy]
+
+  def index
+    @users = User.all
+    render json: @users
+  end
+
 
   def create
     @user = User.new(user_params)
@@ -12,6 +19,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    render json: @user
+  end
+
   def login
       @user = User.find_by(email: params[:user][:email])
       if @user && @user.authenticate(params[:user][:password])
@@ -21,7 +32,6 @@ class UsersController < ApplicationController
         render json: {token: token}
 
         decoded_token = JWT.decode token, 'secret', true, { :algorithm => 'HS256' }
-        binding.pry
         puts decoded_token
       end
     end
@@ -29,7 +39,11 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:name ,:email, :password)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 
 end

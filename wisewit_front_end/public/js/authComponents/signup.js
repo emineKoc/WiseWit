@@ -7,8 +7,9 @@ const SignUp = React.createClass({
   handleSubmit: function(event){
       event.preventDefault();
       const signupInfo = { user: {
+        name: this.refs.name.value,
         email: this.refs.email.value,
-        password: this.refs.password.value,
+        password: this.refs.password.value
       }
       }
 
@@ -18,20 +19,36 @@ const SignUp = React.createClass({
 
   render: function(){
     return (
-     <section id="signup">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12 text-center">
-          <h4>Sign up</h4>
-            <form ref="createUserForm" onSubmit={this.handleSubmit}>
-              <label><input ref="email" placeholder="email" /></label>
-              <label><input ref="password" placeholder="password" /></label>
-              <button type="submit">Sign Up</button>
-            </form>
+      <section id="signup text-center">
+ <div className="container">
+    <div className="row">
+      <div className="col-lg-8 text-left">
+      <h4>Sign up</h4>
+        <form ref="createUserForm" className="form-horizontal"  onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <label className="col-md-8 control-label"></label>
+          <div className="col-md-8">
+          <input ref="name" placeholder="name" />
           </div>
-        </div>
+          </div>
+          <div className="form-group">
+            <label className="col-md-8 control-label"></label>
+            <div className="col-md-8">
+            <input ref="email" placeholder="email" />
+            </div>
+            </div>
+            <div className="form-group">
+              <label className="col-md-8 control-label"></label>
+              <div className="col-md-8">
+              <input ref="password" placeholder="password" />
+              </div>
+            </div>
+          <button type="submit" className="btn btn-info" >Sign Up</button>
+        </form>
       </div>
-      </section>
+    </div>
+  </div>
+  </section>
     )
   }
 })

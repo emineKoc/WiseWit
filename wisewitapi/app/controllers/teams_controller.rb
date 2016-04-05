@@ -21,6 +21,7 @@ class TeamsController < ApplicationController
   end
 
   def show
+    @team = Team.find(params[:id])
     render json: @team
   end
 
@@ -42,7 +43,7 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:name, :description)
   end
 
-  def set_task
+  def set_team
     @team = Team.find(params[:id])
   end
 
