@@ -4,6 +4,30 @@ const $ = require('jquery');
 
 
 const CreateGroup = React.createClass({
+  handleSubmit:function(event){
+    event.preventDefault()
+    const groupInfo = { group: {
+      name: this.refs.name.value,
+      description: this.refs.description.value,
+      members: this.refs.members.value
+      }
+    }
+    this.signUpRequest(groupInfo)
+  },
+
+  signUpRequest: function(groupInfo) {
+
+    const group = groupInfo
+
+   $.post('http://localhost:9001/groups', group)
+     .done((data) => {
+     })
+     .error((error) => {
+       console.error(error);
+     })
+  },
+
+
   render: function() {
     return (
       <div id="create-a-project text-center">
@@ -16,18 +40,21 @@ const CreateGroup = React.createClass({
       <div className="form-group">
         <label className="col-md-8 control-label"></label>
         <div className="col-md-8">
-        <input id="textinput" name="textinput" type="text" placeholder="Team Name" className="form-control input-md"/>
+        <input ref = "name" type="text" placeholder="Team Name" className="form-control input-md"/>
         </div>
       </div>
 
       <div className="form-group">
-        <label className="col-md-8 control-label" ></label>
+        <label className="col-md-8 control-label"></label>
         <div className="col-md-8">
-          <select ref="selectbasic" name="selectbasic" className="form-control">
-            <option value="1">Type of the project</option>
-            <option value="2">Private</option>z
-            <option value="3">Team Name</option>
-          </select>
+        <input ref = "description" type="text" placeholder="Team description" className="form-control input-md"/>
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label className="col-md-8 control-label"></label>
+        <div className="col-md-8">
+        <input ref = "members" type="text" placeholder="Team Members" className="form-control input-md"/>
         </div>
       </div>
 
@@ -36,6 +63,7 @@ const CreateGroup = React.createClass({
           <button  className="btn btn-info">Create a team</button>
         </div>
       </div>
+
       </form>
       </div>
       </div>
