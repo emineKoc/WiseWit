@@ -2,20 +2,20 @@
 const React = require('react');
 const $ = require('jquery');
 
-
 const CreateGroup = React.createClass({
   handleSubmit:function(event){
     event.preventDefault()
+    this.getUserData()
     const groupInfo = { group: {
       name: this.refs.name.value,
       description: this.refs.description.value,
       members: this.refs.members.value
       }
     }
-    this.signUpRequest(groupInfo)
+    this.createGroup(groupInfo)
   },
 
-  signUpRequest: function(groupInfo) {
+  createGroup: function(groupInfo) {
 
     const group = groupInfo
 

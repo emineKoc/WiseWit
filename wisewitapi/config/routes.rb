@@ -3,13 +3,16 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
 
-  resources :users
   post '/users' => 'users#create'
-  post '/users/login' => 'users#create'
+  get   '/users/login' => 'users#authorization'
+  post '/users/login' => 'users#login'
+  # resources :users
 
 
   resources :teams, except:[:new, :edit]
+  resources :users do
   resources :groups
+  end
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

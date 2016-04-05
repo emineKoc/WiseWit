@@ -14,7 +14,7 @@ const Nav = React.createClass({
     return (
       <div className="container">
       <div className="navbar-header page-scroll">
-      <a className="navbar-brand page-scroll"> WiseWit </a>
+      <a className="navbar-brand page-scroll"> <Link to="/logout">WiseWit</Link> </a>
     </div>
 
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -1,6 +1,5 @@
 'use strict'
 const React = require('react');
-// const auth = require('./auth');
 const $ = require('jquery');
 
 const CreateProject = React.createClass({

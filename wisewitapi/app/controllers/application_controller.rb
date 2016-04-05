@@ -5,6 +5,5 @@ class ApplicationController < ActionController::API
   end
   # protect_from_forgery with: :null_session
   # private
-  # def  protect_from_forgery
   # end
 end

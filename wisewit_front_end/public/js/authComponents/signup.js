@@ -15,13 +15,14 @@ const SignUp = React.createClass({
 
       signUpRequest(signupInfo);
       this.refs.createUserForm.reset();
+
   },
 
   render: function(){
     return (
       <section id="signup text-center">
- <div className="container">
-    <div className="row">
+        <div className="container">
+          <div className="row">
       <div className="col-lg-8 text-left">
       <h4>Sign up</h4>
         <form ref="createUserForm" className="form-horizontal"  onSubmit={this.handleSubmit}>

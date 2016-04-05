@@ -37,12 +37,12 @@ const Login = React.createClass({
   render: function() {
     return (
       <section id="signup">
- <div className="container">
-   <div className="row">
-     <div className="col-lg-8 text-left">
-     <h4>Sign in</h4>
-     <form ref="login" className="form-horizontal"  onSubmit={this.handleSubmit}>
-     <div className="form-group">
+        <div className="container">
+        <div className="row">
+       <div className="col-lg-8 text-left">
+       <h4>Sign in</h4>
+       <form ref="login" className="form-horizontal"  onSubmit={this.handleSubmit}>
+       <div className="form-group">
        <label className="col-md-8 control-label"></label>
        <div className="col-md-8">
        <input ref="email" placeholder="email" />
