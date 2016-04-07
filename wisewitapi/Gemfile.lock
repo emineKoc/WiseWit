@@ -47,6 +47,10 @@ GEM
     i18n (0.7.0)
     json (1.8.3)
     jwt (1.5.4)
+    knock (1.4.2)
+      bcrypt (~> 3.1)
+      jwt (~> 1.5)
+      rails (>= 4.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -118,6 +122,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   jwt
+  knock
   pg
   pry-rails
   rack-cors

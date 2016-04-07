@@ -7,6 +7,9 @@ const Router = ReactRouter.Router;
 const browserHistory = ReactRouter.browserHistory;
 const Route = ReactRouter.Route;
 const Link = ReactRouter.Link;
+const Navigation  = ReactRouter.Navigation;
+
+
 
 const auth = require('./authComponents/auth.js');
 const $ = require('jquery');
@@ -17,35 +20,62 @@ const HowItWorks = require('./howitworks.js')
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
 const SignUp = require('./authComponents/signup.js');
+const ShowUser = require('./authComponents/user_profile.js');
+const Ideas = require('./ideas/create_ideas.js');
+
 
 const UserDashboard = require('./user_landing_page/user_dashboard.js');
 
 const App = React.createClass({
   getInitialState: function() {
     return {
-      loggedIn: auth.loggedIn()
+      loggedIn: auth.loggedIn(),
+      profile : false,
+      edit : false,
+      ideas:{}
     }
   },
+
+
+  // getUserInfo: function(event) {
+  //     $.ajax({
+  //       url: 'http://localhost:9001/users/',
+  //       beforeSend: function( xhr ) {
+  //         xhr.setRequestHeader("Authorization", auth.getToken());
+  //       }
+  //     }).complete((data) => {
+  //       console.log('this is the current user data', data)
+  //       this.setUserState(data)
+  //     })
+  //   },
+  // setUserState:function(data){
+  //   this.state.user = data;
+  //   this.setState({user: data})
+  // },
 
   updateAuth: function(loggedIn) {
     this.setState({
       loggedIn: loggedIn
+
     })
   },
 
   componentWillMount: function() {
     auth.onChange = this.updateAuth
-    auth.login()
+    auth.login
   },
 
   render: function() {
+    const token = auth.getToken()  //???
+
     return (
       <div>
         <Nav loggedIn={this.state.loggedIn} />
         {this.props.children || <p>{this.state.loggedIn} You are {!this.state.loggedIn && 'not'} logged in.</p>}
         <Welcome />
         <HowItWorks />
-        <UserDashboard/>
+        <UserDashboard current_user = {this.state.current_user}/>
+        <ShowUser />
       </div>
     )
   }
@@ -110,7 +140,9 @@ ReactDOM.render((
       <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
       <Route path="new" component={SignUp} />
+      <Route path="ideas" component={Ideas}/>
       <Route path="dashboard" component={UserDashboard} onEnter={requireAuth} />
+      <Route path="UserDashboard" component={UserDashboard} onEnter={requireAuth} />
     </Route>
     <Route path="*" component={ErrorPage} />
   </Router>

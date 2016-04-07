@@ -1,18 +1,23 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  # mount Knock::Engine => "/knock"
+  # post 'auth_token' => 'auth_token#create'
+  post 'authenticate' => 'auth#authenticate'
 
 
-  post '/users' => 'users#create'
+  # post '/users' => 'users#create'
+  post '/groups' => 'groups#create'
   get   '/users/login' => 'users#authorization'
   post '/users/login' => 'users#login'
-  # resources :users
+  resources :users
+  resources :ideas
 
-
-  resources :teams, except:[:new, :edit]
   resources :users do
-  resources :groups
+    resources :groups
   end
+
+  # resources :teams, except:[:new, :edit]
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

@@ -14,16 +14,21 @@ const Nav = React.createClass({
     return (
       <div className="container">
       <div className="navbar-header page-scroll">
-      <a className="navbar-brand page-scroll"> <Link to="/logout">WiseWit</Link> </a>
+      <a className="navbar-brand page-scroll"> <Link to="/">WiseWit</Link> </a>
     </div>
 
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            <ul className="nav navbar-nav navbar-right">
              <li className="hidden">
-               <a href="#page-top" />
+               <a href="#page-top"/>
              </li>
              <li>
                <a className="page-scroll" > {this.props.loggedIn ? true : <nav> </nav> } </a>
+             </li>
+             <li>
+               <a className="page-scroll" href="#ideas">
+               <Link to="/ideas">Ideas</Link>
+               </a>
              </li>
              <li>
                <a className="page-scroll">

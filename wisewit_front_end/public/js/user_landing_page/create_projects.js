@@ -25,7 +25,7 @@ const CreateProject = React.createClass({
         <div className="col-md-8">
           <select ref="selectbasic" name="selectbasic" className="form-control">
             <option value="1">Type of the project</option>
-            <option value="2">Private</option>z
+            <option value="2">Private</option>
             <option value="3">Team Name</option>
           </select>
         </div>

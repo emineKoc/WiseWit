@@ -3,30 +3,28 @@ const React = require('react');
 const CreateProject = require('./create_projects.js')
 const CreateTeam = require('./create_group.js')
 const ShowGroups = require('./show_groups.js')
+const ShowUser= require('./show_groups.js')
 
 const UserDashboard = React.createClass({
   getInitialState: function() {
     return {
-      user:{},
       projects: {},
       groups: {}
     }
   },
-  hanglegroups:function(state){
+  handlegroups:function(state){
     this.setState({groups:state})
   },
   addProjects:function(entry){
-      this.state.projects.push(entry)
-  },
-  addGroups:function(group){
-    this.state.groups.push(group)
+    this.setState({projects:entry})
   },
   render: function() {
     return (
       <section>
       <CreateProject/>
       <CreateTeam/>
-      <ShowGroups hanglegroups = {this.hanglegroups} groups = {this.state.groups}/>
+      <h1>show all groups</h1>
+      <ShowGroups handlegroups = {this.handlegroups} groups = {this.state.groups}/>
       </section>
     )
   }

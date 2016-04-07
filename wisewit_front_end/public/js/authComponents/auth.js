@@ -31,7 +31,7 @@ module.exports = {
  },
 
  loggedIn: function() {
-   return !!localStorage.token
+   return !! localStorage.token
  },
 
  onChange: function() {}
@@ -39,7 +39,7 @@ module.exports = {
 
 
 function loginRequest(email, pass, cb) {
-
+// I changed user: to auth:
  var loginInfo = {
    user: {
    email: email,
@@ -67,7 +67,6 @@ function loginRequest(email, pass, cb) {
    })
 }
 
-// reference: https://github.com/Umbrellagun/debate-dissector/blob/master/debate_dissector/public/js/components/auth.js
 function getInfo() {
    $.ajax({
      url: 'http://localhost:9001/users/login',
@@ -79,13 +78,11 @@ function getInfo() {
    .done(function(data){
      debugger
      if (data) {
-       console.log('Should be saying this if logged IN.');
-       console.log('This should be the user id: ' + data.id);
-       console.log('This should be the username: ' + data.email);
+       console.log('successully logged in');
+       console.log('user id: ' + data.id);
+       console.log('user email: ' + data.email);
      } else {
-       console.log('Should be saying this if logged OUT.');
-       console.log('This should be the default id data: ' + data.id);
-       console.log('This should be the default username data: ' + data.email);
+       console.log('successully logged OUT.');
        this.logout()
      }
      console.log('Is the user token expired? ' + data.expired);

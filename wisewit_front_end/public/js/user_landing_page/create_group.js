@@ -5,13 +5,14 @@ const $ = require('jquery');
 const CreateGroup = React.createClass({
   handleSubmit:function(event){
     event.preventDefault()
-    this.getUserData()
+
     const groupInfo = { group: {
       name: this.refs.name.value,
       description: this.refs.description.value,
-      members: this.refs.members.value
+      members:[]
       }
     }
+
     this.createGroup(groupInfo)
   },
 
@@ -29,6 +30,8 @@ const CreateGroup = React.createClass({
 
 
   render: function() {
+    // console.log(token.email)
+    
     return (
       <div id="create-a-project text-center">
       <div className="container">

@@ -5,7 +5,6 @@ class UsersController < ApplicationController
     render json: @users
   end
 
-
   def create
     @user = User.new(user_params)
 
@@ -36,27 +35,27 @@ class UsersController < ApplicationController
       end
     end
 
-    def authorization
-    secret = 'secret'
-    token = request.headers["HTTP_AUTHORIZATION"]
-    # got help from Caleb.https://github.com/Umbrellagun
-    decoded_token = JWT.decode token, secret, true, { :algorithm => 'HS256' }
-    expired = decoded_token[0]["exp"] <= Time.now.to_i
-    # sends true if expired, false if not. Can the client side manipulate this?
-    if expired
-      render json: {
-        expired:  expired,
-        id:    "",
-        email: ""
-      }
-    else
-      render json: {
-        expired: expired,
-        id:    decoded_token[0]["token"]["id"],
-        email: decoded_token[0]["token"]["email"]
-      }
-    end
-  end
+    # def authorization
+    #   secret = 'secret'
+    #   token = request.headers["HTTP_AUTHORIZATION"]
+    #   # got help from Caleb.https://github.com/Umbrellagun
+    #   decoded_token = JWT.decode token, secret, true, { :algorithm => 'HS256' }
+    #   expired = decoded_token[0]["exp"] <= Time.now.to_i
+    #   # sends true if expired, false if not. Can the client side manipulate this?
+    #   if expired
+    #     render json: {
+    #       expired:  expired,
+    #       id:    "",
+    #       email: ""
+    #     }
+    #   else
+    #     render json: {
+    #       expired: expired,
+    #       id:    decoded_token[0]["token"]["id"],
+    #       email: decoded_token[0]["token"]["email"]
+    #     }
+    #   end
+    # end
 
   private
 

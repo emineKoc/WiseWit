@@ -60,11 +60,18 @@ function signUpRequest(signupInfo) {
   const d = signupInfo
 
  $.post('http://localhost:9001/users', d)
-   .done((data) => {
+ .done( (data) =>(
+   cb({
+     status: 201,
+     success: true
    })
-   .error((error) => {
-     console.error(error);
+ ))
+ .fail( (data) => {
+   cb({
+     status: 202,
+     data: data
    })
+ })
 }
 
 module.exports = SignUp;

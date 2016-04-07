@@ -20,6 +20,7 @@ const Login = React.createClass({
     const email = this.refs.email.value
     const pass = this.refs.pass.value
 
+
     auth.login(email, pass, (loggedIn) => {
       if (!loggedIn)
         return this.setState({ error: true })
@@ -36,7 +37,7 @@ const Login = React.createClass({
 
   render: function() {
     return (
-      <section id="signup">
+      <div id="signup">
         <div className="container">
         <div className="row">
        <div className="col-lg-8 text-left">
@@ -63,7 +64,7 @@ const Login = React.createClass({
   </div>
 </div>
 </div>
-</section>
+</div>
     )
   }
 })
