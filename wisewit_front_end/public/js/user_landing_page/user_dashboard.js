@@ -25,7 +25,7 @@ const UserDashboard = React.createClass({
       <CreateTeam/>
       <h1>show all groups</h1>
       <ShowGroups handlegroups = {this.handlegroups} groups = {this.state.groups}/>
-      </section>
+    </section>
     )
   }
 })

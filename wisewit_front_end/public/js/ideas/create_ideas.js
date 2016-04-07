@@ -26,9 +26,22 @@ const Ideas = React.createClass({
     $.post('http://localhost:9001/ideas', newIdea)
     .done(updateData);
   },
+  handleDelete:function(key){
+        $.ajax(
+          {
+            url : `http://localhost:9001/ideas/${key}`,
+            method : 'DELETE',
+            beforeSend: function( xhr ) {
+              xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
+            },
+            data:{ id :key}
+        }).done( ( data ) => {
+        })
+    this.setState({ ideas: this.state.ideas })
+  },
   renderIdea:function(key){
     return (
-      <Idea key={key} index={key} details={this.state.ideas[key]}  />
+      <Idea key={key} index={key} details={this.state.ideas[key]} handleDelete={this.handleDelete}  />
     )
   },
   render:function() {
@@ -39,7 +52,6 @@ const Ideas = React.createClass({
             <h4>Ideas</h4>
             {/* Ideas  FORM*/}
             <CreateIdeaForm addIdea={this.addIdea}/>
-            <button onClick={this.renderIdea}>Show all ideas</button>
             {Object.keys(this.state.ideas)
                 .map( this.renderIdea )}
         </div>
@@ -63,7 +75,6 @@ const Ideas = React.createClass({
       this.props.addIdea(ideaInfo)
       // clear the form
       this.refs.ideaForm.reset()
-
     },
     render:function() {
 
@@ -84,13 +95,17 @@ const Ideas = React.createClass({
     handleClick : function(event) {
       event.preventDefault();
     },
-
+    deleteIdea : function(event) {
+      event.preventDefault();
+      this.props.handleDelete(this.props.index)
+        },
     render:function() {
       return (
         <li className="collection-item">
           <div>
-            <strong>{this.props.details.idea.name}</strong>
+            <strong>{this.props.details.name}</strong>
             <a href="#" onClick={this.handleClick} className="secondary-content"></a>
+            <a href="#" onClick={this.deleteIdea} className="secondary-content">x</a>
           </div>
         </li>
       )

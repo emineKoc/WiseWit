@@ -15,7 +15,6 @@ const auth = require('./authComponents/auth.js');
 const $ = require('jquery');
 const Nav = require('./nav.js')
 const Welcome = require('./welcome_banner.js')
-const HowItWorks = require('./howitworks.js')
 
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
@@ -32,7 +31,7 @@ const App = React.createClass({
       loggedIn: auth.loggedIn(),
       profile : false,
       edit : false,
-      ideas:{}
+      ideasRoute : false
     }
   },
 
@@ -56,7 +55,6 @@ const App = React.createClass({
   updateAuth: function(loggedIn) {
     this.setState({
       loggedIn: loggedIn
-
     })
   },
 
@@ -64,17 +62,20 @@ const App = React.createClass({
     auth.onChange = this.updateAuth
     auth.login
   },
-
+  // toggleIdeas: function() {
+  //   this.state.ideas ? this.state.ideas || !this.state.ideas
+  // },
   render: function() {
     const token = auth.getToken()  //???
 
+
     return (
       <div>
-        <Nav loggedIn={this.state.loggedIn} />
+        <Nav loggedIn={this.state.loggedIn} ideasRoute = {this.state.ideasRoute}/>
         {this.props.children || <p>{this.state.loggedIn} You are {!this.state.loggedIn && 'not'} logged in.</p>}
-        <Welcome />
-        <HowItWorks />
-        <UserDashboard current_user = {this.state.current_user}/>
+
+          {this.state.loggedIn ? ( <UserDashboard current_user = {this.state.current_user}/> ) :
+        ( <Welcome /> ) }
         <ShowUser />
       </div>
     )
@@ -140,7 +141,7 @@ ReactDOM.render((
       <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
       <Route path="new" component={SignUp} />
-      <Route path="ideas" component={Ideas}/>
+      <Route path="ideas" component={Ideas} onEnter={requireAuth}/>
       <Route path="dashboard" component={UserDashboard} onEnter={requireAuth} />
       <Route path="UserDashboard" component={UserDashboard} onEnter={requireAuth} />
     </Route>

@@ -12,16 +12,20 @@ const CreateGroup = React.createClass({
       members:[]
       }
     }
-
     this.createGroup(groupInfo)
   },
 
   createGroup: function(groupInfo) {
 
     const group = groupInfo
-
-   $.post('http://localhost:9001/groups', group)
-     .done((data) => {
+    $.post(
+  {
+    url : 'http://localhost:9001/groups',
+    data : group,
+    beforeSend: function( xhr ) {
+      xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
+      }
+      }).done((data) => {
      })
      .error((error) => {
        console.error(error);
@@ -31,7 +35,7 @@ const CreateGroup = React.createClass({
 
   render: function() {
     // console.log(token.email)
-    
+
     return (
       <div id="create-a-project text-center">
       <div className="container">

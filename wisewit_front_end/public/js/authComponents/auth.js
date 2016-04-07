@@ -52,7 +52,7 @@ function loginRequest(email, pass, cb) {
     //  got help from Caleb
      console.log('This is the token: ' + data.token)
      localStorage.token = data.token
-     getInfo();
+    //  getInfo();
      cb({
        authenticated: true,
        token: data.token

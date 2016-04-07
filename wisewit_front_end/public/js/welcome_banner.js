@@ -1,10 +1,12 @@
 'use strict'
 const React = require('react');
 const ReactRouter = require('react-router');
+const HowItWorks = require('./howitworks.js')
 
 const Welcome = React.createClass({
   render: function(){
     return (
+      <div>
         <header>
               <div className="container">
                 <div className="intro-text">
@@ -14,6 +16,8 @@ const Welcome = React.createClass({
                 </div>
               </div>
             </header>
+          <HowItWorks/>
+          </div>
           );
         }
       });

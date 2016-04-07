@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-    before_action :find_idea, only: [:show, :update,:destroy]
+    before_action :find_idea, only: [:show, :update, :destroy]
     # before_action :authenticate_request!
     # before_action :authenticate
     # this feature will be open to anyone before signed in for now.
@@ -21,7 +21,6 @@ class IdeasController < ApplicationController
     end
 
     def show
-      @idea = Idea.find(params[:id])
       render json: @idea
     end
 
@@ -43,8 +42,8 @@ class IdeasController < ApplicationController
       params.require(:idea).permit(:name)
     end
 
-    def find_group
-      @team = Group.find(params[:id])
+    def find_idea
+      @idea = Idea.find(params[:id])
     end
 
 end
