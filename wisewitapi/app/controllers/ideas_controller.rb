@@ -39,7 +39,7 @@ class IdeasController < ApplicationController
     private
 
     def idea_params
-      params.require(:idea).permit(:name)
+      params.require(:idea).permit(:name, :project_id)
     end
 
     def find_idea
