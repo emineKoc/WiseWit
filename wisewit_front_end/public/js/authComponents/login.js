@@ -28,7 +28,7 @@ const Login = React.createClass({
       if (location.state && location.state.nextPathname) {
         this.context.router.replace(location.state.nextPathname)
       } else {
-        this.context.router.replace('/')
+        this.context.router.replace('/ideas')
       }}
     })
   },
@@ -40,7 +40,7 @@ const Login = React.createClass({
         <div className="row">
        <div className="col-lg-8 text-left">
        <h4>Sign in</h4>
-       <form ref="login" className="form-horizontal"  onSubmit={this.handleSubmit}>
+       <form ref="login" id = "login" className="form-horizontal"  onSubmit={this.handleSubmit}>
        <div className="form-group">
        <label className="col-md-8 control-label"></label>
        <div className="col-md-8">
@@ -53,7 +53,7 @@ const Login = React.createClass({
          <input ref="pass" placeholder="password" />
          </div>
        </div>
-     <button type="submit" className="btn btn-info"  >login</button>
+     <button type="submit" className="btn btnuser "  >login</button>
      {this.state.error && (
        <p>Bad login information</p>
      )}

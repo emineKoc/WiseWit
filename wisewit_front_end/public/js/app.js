@@ -20,6 +20,7 @@ const SignUp = require('./authComponents/signup.js');
 const ShowUser = require('./authComponents/user_profile.js');
 const Ideas = require('./ideas/create_ideas.js');
 const Swot = require('./swot/create_swot.js');
+const Footer = require('./footer.js')
 
 
 const UserDashboard = require('./user_landing_page/user_dashboard.js');
@@ -128,15 +129,16 @@ const App = React.createClass({
 
   render: function() {
     const token = auth.getToken()  //???
-
+    // not display : <span id = "user_login_info"> {this.state.loggedIn} You are {!this.state.loggedIn && 'not'} logged in.</p>
 
     return (
       <div>
         <Nav loggedIn={this.state.loggedIn} ideasRoute = {this.state.ideasRoute}/>
-        {this.props.children || <p> {this.state.loggedIn} You are {!this.state.loggedIn && 'not'} logged in.</p>}
+        {this.props.children ||<span></span>}
 
           {this.state.loggedIn ? ( <UserDashboard current_user = {this.state.current_user}/> ) :
         ( <Welcome /> ) }
+        <Footer/>
       </div>
     )
   }

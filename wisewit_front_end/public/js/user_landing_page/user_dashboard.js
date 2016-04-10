@@ -19,12 +19,11 @@ const UserDashboard = React.createClass({
     this.setState({projects:entry})
   },
   render: function() {
+    // <ShowGroups handlegroups = {this.handlegroups} groups = {this.state.groups}/>
+    // <CreateProject/>
+    // <CreateTeam/>
     return (
       <section>
-      <CreateProject/>
-      <CreateTeam/>
-      <h1>show all groups</h1>
-      <ShowGroups handlegroups = {this.handlegroups} groups = {this.state.groups}/>
     </section>
     )
   }

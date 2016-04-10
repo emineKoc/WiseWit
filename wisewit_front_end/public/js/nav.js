@@ -16,9 +16,8 @@ const Nav = React.createClass({
       <nav className = "navbar navbar-default navbar-fixed-top">
       <div className="container nav">
       <div className="navbar-header page-scroll">
-
-      <a className="navbar-brand page-scroll"> <Link to="/">WiseWit</Link> </a>
-    </div>
+      <a className="navbar-brand page-scroll"> <Link to="/"> <span  id = "logooo" > WiseWit </span> </Link> </a>
+      </div>
 
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            <ul className="nav navbar-nav navbar-right">
@@ -32,25 +31,25 @@ const Nav = React.createClass({
              </li>
              <li>
                <a className="page-scroll" href="#ideas">
-               <Link to="/ideas">Ideas</Link>
+               <Link to="/ideas"><span id = "menuitem" >Ideas</span></Link>
                </a>
              </li>
              <li>
                <a className="page-scroll" href="#swot">
-               <Link to="/swot">Swot</Link>
+               <Link to="/swot"><span id = "menuitem" >Swot</span></Link>
                </a>
              </li>
              <li>
                <a className="page-scroll">
                     {this.props.loggedIn ? (
-                   <Link to="/logout">Log out</Link>
+                   <Link to="/logout"><span id = "menuitem" >Log out</span></Link>
                     ) : (
-                   <Link to="/login">Sign in</Link>
+                   <Link to="/login"><span id = "menuitem" >Sign in</span></Link>
                  )}</a>
              </li>
              <li>
                <a className="page-scroll" href="#signup">
-               <Link to="/new">Sign Up</Link>
+               <Link to="/new"><span id = "menuitem" >Sign Up</span></Link>
                </a>
              </li>
            </ul>

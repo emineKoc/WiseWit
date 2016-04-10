@@ -38,7 +38,6 @@ h4,
 h5,
 h6 {
     font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
     font-weight: 700
 }
 .img-centered {
@@ -218,7 +217,7 @@ fieldset[disabled] .btn-xl.active {
     }
 }
 header {
-    background-image: url(../img/bg.png);
+    background-image: url(../img/bg.svg);
     background-repeat: none;
     background-attachment: scroll;
     background-position: center center;
@@ -242,7 +241,6 @@ header .intro-text .intro-lead-in {
 }
 header .intro-text .intro-heading {
     font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
     font-weight: 700;
     font-size: 50px;
     line-height: 50px;

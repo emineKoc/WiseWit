@@ -34,8 +34,8 @@ const SignUp = React.createClass({
     // },
   render: function(){
     return (
-      <section id="signup text-center">
-        <div className="container">
+      <div id="signup" >
+        <div className="container text-center">
           <div className="row">
       <div className="col-lg-8 text-left">
       <h4>Sign up</h4>
@@ -58,12 +58,12 @@ const SignUp = React.createClass({
               <input ref="password" placeholder="password" />
               </div>
             </div>
-          <button type="submit" className="btn btn-info" >Sign Up</button>
+          <button type="submit" className="btn btnuser" >Sign Up</button>
         </form>
       </div>
     </div>
   </div>
-  </section>
+  </div>
     )
   }
 })
