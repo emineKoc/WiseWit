@@ -11,18 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408143117) do
+ActiveRecord::Schema.define(version: 20160409182704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "factors", force: :cascade do |t|
     t.text    "name"
-    t.string  "type"
+    t.string  "category"
     t.integer "project_id"
   end
-
-  add_index "factors", ["project_id"], name: "index_factors_on_project_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,33 +32,25 @@ ActiveRecord::Schema.define(version: 20160408143117) do
   end
 
   create_table "ideas", force: :cascade do |t|
+    t.integer  "project_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "project_id"
   end
-
-  add_index "ideas", ["project_id"], name: "index_ideas_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string  "name"
-    t.integer "user_id"
-    t.integer "group_id"
-  end
-
-  create_table "teams", force: :cascade do |t|
-    t.string  "name"
-    t.text    "description"
-    t.integer "user"
-    t.text    "members"
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.string "name"
   end
 
   add_foreign_key "factors", "projects"
-  add_foreign_key "ideas", "projects"
 end

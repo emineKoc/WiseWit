@@ -11,7 +11,6 @@ class IdeasController < ApplicationController
     def create
 
       @idea = Idea.new(idea_params)
-
       if @idea.save
         render json: @idea
       else

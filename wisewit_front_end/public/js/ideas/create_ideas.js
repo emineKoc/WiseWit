@@ -1,15 +1,39 @@
 'use strict'
 const React = require('react');
-// const auth = require('./auth');
+const auth = require('../authComponents/auth.js');
 const $ = require('jquery');
 
 const Ideas = React.createClass({
-  getInitialState:function(){
-    return { ideas:{} }
+  // let current_user : this.props.current_user
+  contextTypes: {
+  userid: React.PropTypes.string,
+  current_user_name: React.PropTypes.string,
+  userid: React.PropTypes.string,
+  },
+
+  seeCurrentUser: function(){
+        $.ajax({
+          url: 'http://localhost:9001/users/:id',
+          beforeSend: function( xhr ) {
+            xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken() );
+          }
+        }).done((data) => {
+          this.setState({me: data.agent.email})
+        })
+  },
+
+  getInitialState:function(){  // I will move there to app.js
+    return { ideas:{},
+             randomDecision:'' }
   },
   componentDidMount:function() {
    // this is where you'll get the data from the 'db'
-   $.get('http://localhost:9001/ideas').done( data=>{
+   $.get({
+      url: 'http://localhost:9001/projects/1/ideas',
+      beforeSend: function( xhr ) {
+       xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
+     }
+     }).done((data) => {
       data.forEach( el => {
         this.state.ideas[el.id] = el;
       });
@@ -18,18 +42,25 @@ const Ideas = React.createClass({
   },
   addIdea:function( newIdea ) {
     var updateData = (data)=>{
-      var id = data.idea_id;
+      console.log('datatatatata: ',data)
+      var id = data.id;
       // add new task to state
       this.state.ideas[id] = newIdea;
       this.setState({ ideas: this.state.ideas });
     }
-    $.post('http://localhost:9001/ideas', newIdea)
+    $.post({
+      url: 'http://localhost:9001/projects/1/ideas',
+      data: newIdea,
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader( "Authorization", 'Bearer ' + auth.getToken() );
+      },
+    })
     .done(updateData);
   },
   handleDelete:function(key){
         $.ajax(
           {
-            url : `http://localhost:9001/ideas/${key}`,
+            url : `http://localhost:9001/projects/1/ideas/${key}`,
             method : 'DELETE',
             beforeSend: function( xhr ) {
               xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
@@ -44,26 +75,37 @@ const Ideas = React.createClass({
       <Idea key={key} index={key} details={this.state.ideas[key]} handleDelete={this.handleDelete}  />
     )
   },
-  render:function() {
+  IdeasArray: function(){
+    let ideasForPoll = [];
+    $.get('http://localhost:9001/projects/1/ideas').done( data=>{
+       data.forEach( el => {
+         ideasForPoll.push({ name: el.name , vote:5 })
+       });
+       let RandomNumber = Math.floor( Math.random() * ideasForPoll.length )
+       let theChoice = ideasForPoll[RandomNumber].name
+       this.setState({ randomDecision: theChoice });
+     });
+  },
+  render: function() {
     return (
       <div id="ideas">
       <div className="container">
         <div className="row">
-            <h4>Ideas</h4>
             {/* Ideas  FORM*/}
             <CreateIdeaForm addIdea={this.addIdea}/>
             {Object.keys(this.state.ideas)
                 .map( this.renderIdea )}
         </div>
-            <div className="row">
-            </div>
+            <button onClick={this.IdeasArray}>Click here to find choice</button>
+            <p>{this.state.randomDecision}</p>
+            <p>{this.state.me}</p>
+            <a href="#" onLoad={this.seeCurrentUser}></a>
         </div>
         </div>
     )
   }
 
   });  // ideas component ends here
-
   const CreateIdeaForm = React.createClass({
 
     handleSubmit:function(event) {
@@ -76,9 +118,37 @@ const Ideas = React.createClass({
       // clear the form
       this.refs.ideaForm.reset()
     },
-    render:function() {
+    question:function(event) {
+      event.preventDefault()
+      let question = this.refs.questionInput.value
+        $('#question').append(question)
+        $('#questionForm').hide()
 
+        let projectName =  { project: { name: question}}
+
+        let currentProjectId =  $.post(
+          {
+          url : 'http://localhost:9001/projects',
+          data : projectName,
+          beforeSend: function( xhr ) {
+            xhr.setRequestHeader( "Authorization", 'Bearer ' + auth.getToken() );
+            }
+            }).done((data) => {
+           })
+           .error((error) => {
+             console.error(error);
+           })
+
+    },
+    render:function() {
       return (
+        <div>
+        <form id="questionForm" onSubmit={this.question}>
+        <label htmlFor="idea_name">  <p>What is the question? </p></label>
+        <input type="text" ref="questionInput" />
+        <button id="questionFormbutton" type="submit" name="action">Question</button>
+        </form>
+        <h1 id="question"></h1>
         <form ref="ideaForm" onSubmit={this.handleSubmit}>
           <h5>Create a new idea</h5>
               <label htmlFor="idea_name">  Idea  </label>
@@ -87,6 +157,7 @@ const Ideas = React.createClass({
             <button  type="submit" name="action">Add an Idea</button>
           </div>
         </form>
+        </div>
       )
     }
   });  // This is the end of idea create form.
@@ -101,7 +172,7 @@ const Ideas = React.createClass({
         },
     render:function() {
       return (
-        <li className="collection-item">
+        <li className = "ideas" className="collection-item">
           <div>
             <strong>{this.props.details.name}</strong>
             <a href="#" onClick={this.handleClick} className="secondary-content"></a>
@@ -111,6 +182,4 @@ const Ideas = React.createClass({
       )
     }
   });  // End of the idea rendering component
-
-
   module.exports = Ideas;

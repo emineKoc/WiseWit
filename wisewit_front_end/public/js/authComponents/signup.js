@@ -4,20 +4,34 @@ const auth = require('./auth');
 const $ = require('jquery');
 
 const SignUp = React.createClass({
+
   handleSubmit: function(event){
       event.preventDefault();
-      const signupInfo = { user: {
+
+      const signupInfo =
+      { user: {
         name: this.refs.name.value,
         email: this.refs.email.value,
         password: this.refs.password.value
-      }
-      }
+        }
+      };
 
-      signUpRequest(signupInfo);
-      this.refs.createUserForm.reset();
+       $.post('http://localhost:9001/users', signupInfo)
+       .done((data) => { console.log('user saved', signupInfo);
+        })
+       .error((error) => {
+       console.error(error);
+     })
+      // this.props.updateAuth(true);
+ },
 
-  },
-
+      // auth.signup(signupInfo, (thing) => {
+      //   // dunnooo some kind of es7 deconstruction?
+      // const { location } = this.props;
+      // this.context.router.replace('/login');
+      // this.refs.createUserForm.reset();
+      // })
+    // },
   render: function(){
     return (
       <section id="signup text-center">
@@ -54,24 +68,26 @@ const SignUp = React.createClass({
   }
 })
 
+//
+// function signUpRequest(signupInfo, cb) {
+//
+//   const d = signupInfo
+//
+//  $.post('http://localhost:9001/users', d)
+//  .done( (data) =>(
+//    cb({
+//      status: 201,
+//      success: true
+//    })
+//  ))
+//  .fail( (data) => {
+//    cb({
+//      status: 202,
+//      data: data
+//    })
+//  })
+// }
+//
 
-function signUpRequest(signupInfo) {
-
-  const d = signupInfo
-
- $.post('http://localhost:9001/users', d)
- .done( (data) =>(
-   cb({
-     status: 201,
-     success: true
-   })
- ))
- .fail( (data) => {
-   cb({
-     status: 202,
-     data: data
-   })
- })
-}
 
 module.exports = SignUp;

@@ -1,6 +1,6 @@
 'use strict'
 const React = require('react');
-// const auth = require('./auth');
+const auth = require('../authComponents/auth.js');
 const $ = require('jquery');
 
 
@@ -31,8 +31,8 @@ const ShowGroups = React.createClass({
       $.ajax({
         url: 'http://localhost:9001/groups/',
         type: 'Get',
-        beforeSend: function(xhr){
-          xhr.setRequestHeader("Authorization", `Bearer ${localStorage.token}` );
+        beforeSend: function( xhr ) {
+          xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken() );
         }
       })
       .done( function(data) {

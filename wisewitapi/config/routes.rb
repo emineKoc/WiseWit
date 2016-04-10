@@ -1,24 +1,34 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  # mount Knock::Engine => "/knock"
-  # post 'auth_token' => 'auth_token#create'
-  post 'authenticate' => 'auth#authenticate'
+
+  mount Knock::Engine => "/knock"
+  resources :groups
+
+
+  resources :projects do
+    resources :factors
+    resources :ideas
+  end
+
+
+
+
 
 
   # post '/users' => 'users#create'
-  get '/groups' => 'groups#index'
-  post '/groups' => 'groups#create'
-  get   '/users/login' => 'auth#authenticate'  #'users#authorization'
+  # get '/groups' => 'groups#index'
+  # post '/groups' => 'groups#create'
+  # get   '/users/login' => 'users#login' #'users#authorization'
   post '/users/login' => 'users#login'
-
-  resources :groups
-
-  resources :ideas
-
-  resources :users do
-    resources :groups
-  end
+  #
+  # resources :groups
+  # resources :projects
+  #
+  #
+  # resources :users do
+  #   resources :groups
+  # end
 
   # resources :teams, except:[:new, :edit]
 

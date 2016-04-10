@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
     before_action :find_group, only: [:show, :update,:destroy]
+
     # before_action :authenticate_request!
     # before_action :authenticate
 
@@ -10,8 +11,8 @@ class GroupsController < ApplicationController
       # 2: Get the user id from the url params
       # /users/user_id/groups
       @user_id = current_user
-
-      @groups = Group.where(user_id: params[:user_id])
+      @groups = Group.all
+      # @groups = Group.where(user_id: params[:user_id])
       render json: @groups
     end
 
@@ -31,7 +32,7 @@ class GroupsController < ApplicationController
     end
 
     def update
-      if @group.update(task_params)
+      if @group.update(group_params)
         render json: @group
       else
         render json: @group.errors, status: :unprocessable_entity

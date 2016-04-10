@@ -11,9 +11,12 @@ const SignUp = require('./authComponents/signup.js');
 
 const Nav = React.createClass({
   render: function(){
+
     return (
-      <div className="container">
+      <nav className = "navbar navbar-default navbar-fixed-top">
+      <div className="container nav">
       <div className="navbar-header page-scroll">
+
       <a className="navbar-brand page-scroll"> <Link to="/">WiseWit</Link> </a>
     </div>
 
@@ -23,11 +26,18 @@ const Nav = React.createClass({
                <a href="#page-top"/>
              </li>
              <li>
-               <a className="page-scroll" > {this.props.loggedIn ? true : <nav> </nav> } </a>
+               <a className="page-scroll" >
+               {this.props.loggedIn ? true : <nav> </nav> }
+               </a>
              </li>
              <li>
                <a className="page-scroll" href="#ideas">
                <Link to="/ideas">Ideas</Link>
+               </a>
+             </li>
+             <li>
+               <a className="page-scroll" href="#swot">
+               <Link to="/swot">Swot</Link>
                </a>
              </li>
              <li>
@@ -48,6 +58,7 @@ const Nav = React.createClass({
          {/* /.navbar-collapse */}
          {/* /.container-fluid */}
        </div>
+       </nav>
     )
   }
 })

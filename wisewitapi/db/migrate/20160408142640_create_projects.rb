@@ -4,6 +4,7 @@ class CreateProjects < ActiveRecord::Migration
       t.string :name
       t.references :user
       t.references :group
+      t.timestamps
     end
   end
 end

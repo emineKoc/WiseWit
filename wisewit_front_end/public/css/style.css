@@ -7,10 +7,91 @@
 }*/
 
 body {
-    padding-top: 90px;
+    padding-top: 10em;
+    overflow-x: hidden;
+
 }
+
+.navbar-brand{
+  font-size: 36pt;
+}
+/*BOOTSTRAP  */
+.navbar-default .nav li a {
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 1.25em;
+    letter-spacing: 1px;
+    color: #000000;
+}
+.navbar-default .nav li a:hover,
+.navbar-default .nav li a:focus {
+    color: #fed136;
+    outline: 0
+}
+
+.box_titles {
+  font-size: 24px;
+  font-family: 'Carter One', cursive;
+}
+
+#factors{
+  text-align: center;
+}
+.Swot{
+  margin: auto;
+}
+.row col-sm-12 {
+  margin: auto;
+  text-align: center;
+}
+
+#s_box, #w_box, #t_box, #o_box {
+  font-size: 18px;
+  text-align: left;
+  height: 400px;
+  padding: 2em;
+  margin: 1em;
+  -webkit-box-shadow: 10px 10px 39px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 39px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 39px 0px rgba(0,0,0,0.75);
+}
+
+#s_box {
+  background-color: #b1e9f2;
+  border-radius: 65px 65px 0px 65px;
+  -moz-border-radius: 65px 65px 0px 65px;
+  -webkit-border-radius: 65px 65px 0px 65px;
+  }
+
+  #o_box {
+    background-color: #dcf598;
+    border-radius: 65px 0px 65px 65px;
+    -moz-border-radius: 65px 0px 65px 65px;
+    -webkit-border-radius: 65px 0px 65px 65px;
+    }
+  #w_box {
+      background-color: #e7a61a;
+      border-radius: 65px 65px 65px 0px;
+      -moz-border-radius: 65px 65px 65px 0px;
+      -webkit-border-radius: 65px 65px 65px 0px;
+  }
+
+  #t_box {
+
+      background-color: #fcc0c0;
+      border-radius: 0px 65px 65px 65px;
+      -moz-border-radius: 0px 65px 65px 65px;
+      -webkit-border-radius: 0px 65px 65px 65px;
+  }
+
+
+/*
+
+
+
 .panel-login {
 	border-color: #ccc;
+  font-family: 'Aclonica', sans-serif;
 	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
@@ -104,4 +185,4 @@ body {
 	color: #fff;
 	background-color: #1CA347;
 	border-color: #1CA347;
-}
+}*/
