@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :ideas
   end
 
-
+resources :users
 
 
 
@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   # post '/users' => 'users#create'
   # get '/groups' => 'groups#index'
   # post '/groups' => 'groups#create'
-  # get   '/users/login' => 'users#login' #'users#authorization'
+  get   '/users/login' => 'users#login' #'users#authorization'
   post '/users/login' => 'users#login'
-  #
+
   # resources :groups
   # resources :projects
   #

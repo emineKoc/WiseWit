@@ -3,6 +3,7 @@ const React = require('react');
 const auth = require('../authComponents/auth.js');
 const $ = require('jquery');
 
+
 const Ideas = React.createClass({
   // let current_user : this.props.current_user
   contextTypes: {
@@ -75,7 +76,9 @@ const Ideas = React.createClass({
       <Idea key={key} index={key} details={this.state.ideas[key]} handleDelete={this.handleDelete}  />
     )
   },
-  IdeasArray: function(){
+  IdeasArray: function(event){
+    event.preventDefault();
+
     let ideasForPoll = [];
     $.get('http://localhost:9001/projects/1/ideas').done( data=>{
        data.forEach( el => {
@@ -86,20 +89,48 @@ const Ideas = React.createClass({
        this.setState({ randomDecision: theChoice });
      });
   },
+  handlePoll:function(){
+    $('#sorry').append("This feature will be implemeted soon")
+  },
   render: function() {
     return (
       <div id="ideas">
       <div className="container">
-        <div className="row">
+
             {/* Ideas  FORM*/}
             <CreateIdeaForm addIdea={this.addIdea}/>
+            <div className="row col-sm-12" id = "ideaboard">
+            <h4 className="box_titles">Brainstorm Board</h4>
+
             {Object.keys(this.state.ideas)
                 .map( this.renderIdea )}
-        </div>
-            <button onClick={this.IdeasArray}>Click here to find choice</button>
-            <p>{this.state.randomDecision}</p>
-            <p>{this.state.me}</p>
-            <a href="#" onLoad={this.seeCurrentUser}></a>
+            </div>
+
+            <div className="row col-sm-12">
+
+            <div className="col-sm-3 wizard-profile">
+            <img src="./img/wizard.svg"/>
+            </div>
+
+            <div className="col-sm-4 wizzz">
+            <h4 className="box_titles">Let WiseWit Wizard Choose for you</h4>
+            <div id = "randomButton"><a href="#" id = "choosebutton" onClick={this.IdeasArray} >
+            Random Choice
+            </a></div>
+            <h4 className="box_titles">Here is the decision: </h4>
+            <h4 className="head_box_titles">{this.state.randomDecision}</h4>
+            </div>
+
+            <div className="col-sm-3" id="pollButton" onClick={this.handlePoll}>
+            <h4 className="box_titles"> or Let your friends Vote </h4>
+            <div id = "randomButton"><a href="#" id = "choosebutton" onClick={this.createPoll} >
+            Create a Poll
+            </a></div>
+            <h4 id="sorry"></h4>
+            </div>
+
+
+            </div>
         </div>
         </div>
     )
@@ -141,21 +172,18 @@ const Ideas = React.createClass({
 
     },
     render:function() {
+      <form id="questionForm" onSubmit={this.question}>
+      <label htmlFor="idea_name">  <p>What is the question? </p></label>
+      <input type="text" ref="questionInput" />
+      <button id="questionFormbutton" type="submit" name="action">Question</button>
+      </form>
       return (
         <div>
-        <form id="questionForm" onSubmit={this.question}>
-        <label htmlFor="idea_name">  <p>What is the question? </p></label>
-        <input type="text" ref="questionInput" />
-        <button id="questionFormbutton" type="submit" name="action">Question</button>
-        </form>
-        <h1 id="question"></h1>
+        <h1 className="head_box_titles" >Create an Idea</h1>
         <form ref="ideaForm" onSubmit={this.handleSubmit}>
-          <h5>Create a new idea</h5>
-              <label htmlFor="idea_name">  Idea  </label>
-              <input type="text"  id="idea_name" ref="name" />
+              <input className="ideaentry"  type="text"  placeholder= "Add an Idea" id="idea_name" ref="name" />
           <div className="row">
-            <button  type="submit" name="action">Add an Idea</button>
-          </div>
+        </div>
         </form>
         </div>
       )
@@ -172,13 +200,13 @@ const Ideas = React.createClass({
         },
     render:function() {
       return (
-        <li className = "ideas" className="collection-item">
+        <span className = "ideas col-sm-3" id="singleIdea" >
           <div>
             <strong>{this.props.details.name}</strong>
             <a href="#" onClick={this.handleClick} className="secondary-content"></a>
             <a href="#" onClick={this.deleteIdea} className="secondary-content">x</a>
           </div>
-        </li>
+        </span>
       )
     }
   });  // End of the idea rendering component

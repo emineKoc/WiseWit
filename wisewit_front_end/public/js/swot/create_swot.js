@@ -2,6 +2,8 @@
 const React = require('react');
 const auth = require('../authComponents/auth.js');
 const $ = require('jquery');
+const ReactRouter = require('react-router');
+const Link = ReactRouter.Link;
 
 const Swot = React.createClass({
   // let current_user : this.props.current_user
@@ -46,7 +48,23 @@ const Swot = React.createClass({
     })
     .done(updateFactors);
   },
+  updateSwot:function(e){
+    e.preventDefault()
 
+    $.get({
+       url: 'http://localhost:9001/projects/1/factors',
+       beforeSend: function( xhr ) {
+        xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
+      }
+      }).done((data) => {
+       data.forEach( el => {
+         this.state.factors[el.id] = el;
+       });
+       this.setState({factors:this.state.factors})
+     })
+
+
+   },
   handleDelete:function(key){
         $.ajax(
           {
@@ -82,13 +100,17 @@ const Swot = React.createClass({
   render: function() {
     return (
       <div id="factors">
-      <h4 className="box_titles" >Add your Factors</h4>
+      <h1 className="head_box_titles" >Swot Analysis</h1>
+
+      <h4 className="mid_box_titles" >add your factors</h4>
       <CreateFactorForm addFactor={this.addFactor}/>
+      <div className="row col-sm-12">
+      <h4 className="mid_box_titles" ><a href="#" onClick={this.updateSwot}>Update Swot </a></h4>
+      </div>
 
       <div className="container Swot">
-      <h4 className="box_titles" >Swot Analysis</h4>
 
-        <div className="row col-sm-12">
+        <div className="row col-sm-12" className = "swotcontainer">
             <div id="s_box" className="col-sm-5">
             <h4 className="box_titles">Strengths</h4>
             {Object.keys(this.state.factors)
@@ -103,7 +125,7 @@ const Swot = React.createClass({
             </div>
             </div>
 
-            <div className="row col-sm-12">
+            <div className="row col-sm-12" className = "swotcontainer">
             <div id="o_box" className="col-sm-5">
             <h4 className="box_titles">Opportunity</h4>
             {Object.keys(this.state.factors)
@@ -117,12 +139,40 @@ const Swot = React.createClass({
                     .map( this.renderFactor )}
                     </div>
          </div>
-        </div>
+         </div>
+         <Link to= "/tows"> <div className="row col-sm-12" id = "towslink">
+         CREATE TOWS STRATEGIES
+         </div></Link>
       </div>
     )
   }
 
 });  // factors component ends here
+
+
+const Subject = React.createClass({
+  whatissubject:function(event){
+    event.preventDefault()
+    let question = this.refs.questionInput.value
+      $('#subject').append(question)
+      $('#subjectForm').hide()
+  },
+  render:function(){
+    return (
+      <div>
+
+      <form id="subjectForm" onSubmit={this.whatissubject}>
+      <label htmlFor="idea_name">  <h4>What is the subject? </h4></label>
+      <input type="text" ref="questionInput" />
+      <button id="questionFormbutton" type="submit" name="action">Question</button>
+      </form>
+
+      <div id="subject"></div>
+
+      </div>
+    )
+  }
+})
 
 
 const CreateFactorForm = React.createClass({
@@ -182,28 +232,27 @@ const CreateFactorForm = React.createClass({
 
         <div className="col-lg-3">
         <form ref="addStrength" onSubmit={this.Strength} >
-        <input type="text" ref="Sname"  placeholder= "Add a Strength"/>
+        <input  className="swotentry" type="text" ref="Sname"  placeholder= "Add a Strength"/>
         </form>
         </div>
 
         <div className="col-lg-3">
         <form ref="addWeakness" onSubmit={this.Weakness} >
-        <input type="text" ref="Wname"  placeholder= " Add a Weakness"/>
+        <input  className="swotentry" type="text" ref="Wname"  placeholder= " Add a Weakness"/>
         </form>
         </div>
 
         <div className="col-lg-3">
         <form ref="addOpportunity"  onSubmit={this.Opportunity} >
-        <input type="text" ref="Oname"  placeholder= " Add a Opportunity"/>
+        <input  className="swotentry" type="text" ref="Oname"  placeholder= " Add a Opportunity"/>
         </form>
         </div>
 
         <div className="col-lg-3">
         <form ref="addTreat"  onSubmit={this.Treat} >
-        <input type="text" ref="Tname"  placeholder= " Add a Treat"/>
+        <input  className="swotentry" type="text" ref="Tname"  placeholder= " Add a Treat"/>
         </form>
         </div>
-
         </div>
         </div>
       </div>
@@ -225,7 +274,7 @@ const Factor = React.createClass({
         <div>
           <strong>{this.props.details.name}</strong>
           <a href="#" onClick={this.handleClick} className="secondary-content"></a>
-          <a href="#" onClick={this.deleteIdea} className="secondary-content">x</a>
+          <a href="#" onClick={this.deleteFactor} className="secondary-content">x</a>
         </div>
       </li>
     )

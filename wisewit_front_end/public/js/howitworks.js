@@ -16,18 +16,18 @@ const HowItWorks = React.createClass({
                   <div className="col-lg-4 text-center"> <img src="./img/question.svg"/>
                     <h2 className = "howitworks">Have Questions</h2>
                     <h3> Write your question <br/>and Brainstorm </h3>
-                    <Link to="/ideas"><span className="btn btn-block btnuser" href="#page-top">Start Brainstorming </span> </Link>
+                    <Link to="/login"><span className="btn btn-block btnuser" href="#page-top">Start Brainstorming </span> </Link>
                   </div>
                   <div className="col-lg-4 text-center"> <img src="./img/decision.svg"/>
                   <h2 className = "howitworks">Make your Decision</h2>
                   <h3>Get a Random Choice <br/>or Create a Poll </h3>
-                  <Link to="/ideas"><span className="btn btn-block btnuser" href="#page-top">Make decision</span> </Link>
+                  <Link to="/login"><span className="btn btn-block btnuser" href="#page-top">Make decision</span> </Link>
 
                   </div>
                   <div className="col-lg-4 text-center"><img src="./img/analyze.svg"/>
                   <h2 className = "howitworks">Analyze  your decision</h2>
                   <h3> Make Swot & Tows Analysis and Time to Act! </h3>
-                  <Link to="/swot"><span className="btn btn-block btnuser">Analyze </span> </Link>
+                  <Link to="/login"><span className="btn btn-block btnuser">Analyze </span> </Link>
 
 
                   </div>

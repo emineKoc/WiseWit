@@ -20,6 +20,8 @@ const SignUp = require('./authComponents/signup.js');
 const ShowUser = require('./authComponents/user_profile.js');
 const Ideas = require('./ideas/create_ideas.js');
 const Swot = require('./swot/create_swot.js');
+const Tows = require('./tows/create_tows.js');
+
 const Footer = require('./footer.js')
 
 
@@ -201,6 +203,7 @@ ReactDOM.render((
       <Route path="new" component={SignUp} />
       <Route path="ideas" component={Ideas} onEnter={requireAuth}/>
       <Route path="SWOT" component={Swot} onEnter={requireAuth}/>
+      <Route path="TOWS" component={Tows} onEnter={requireAuth}/>
       <Route path="dashboard" component={UserDashboard} onEnter={requireAuth} />
       <Route path="UserDashboard" component={UserDashboard} onEnter={requireAuth} />
     </Route>
