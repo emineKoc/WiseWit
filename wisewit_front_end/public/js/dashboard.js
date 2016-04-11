@@ -26,4 +26,4 @@ const Dashboard = React.createClass({
   }
 })
 
-module.exports = Dashboard;
+module.exports = Dashboardxxx;

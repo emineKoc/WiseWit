@@ -11,19 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331200933) do
+ActiveRecord::Schema.define(version: 20160409182704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "teams", force: :cascade do |t|
-    t.string "name"
-    t.text   "description"
+  create_table "factors", force: :cascade do |t|
+    t.text    "name"
+    t.string  "category"
+    t.integer "project_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "members",     default: [], array: true
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ideas", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
     t.string "email"
     t.string "password_digest"
   end
 
+  add_foreign_key "factors", "projects"
 end
